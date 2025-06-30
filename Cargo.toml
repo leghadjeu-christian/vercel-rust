@@ -17,8 +17,8 @@ num-bigint = "0.4.6"
 
 # Each handler has to be specified as [[bin]]
 [[bin]]
-name = "handler"
-path = "api/handler.rs"
+name = "fib"
+path = "api/fib/[n].rs"
 
 # Note that you need to provide unique names for each binary:
 # [[bin]]

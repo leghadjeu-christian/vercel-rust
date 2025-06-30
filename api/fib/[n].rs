@@ -28,13 +28,18 @@ pub fn fib(n: u32) -> BigUint {
     }
 }
 
-async fn fib_handler(_req: Request) -> Result<Response<Body>, Error> {
 
-    let result = fib(10);
+async fn fib_handler(req: Request) -> Result<Response<Body>, Error> {
+    // Extract the path parameter from the URL: /api/fib/{n}
+    let path = req.uri().path();
+    let n_str = path.trim_start_matches("/api/fib/");
+    let n = n_str.parse::<u32>().unwrap_or(10);
+
+    let result = fib(n);
 
     Ok(Response::builder()
         .status(200)
         .header("Content-Type", "application/json")
         .body(Body::Text(format!(r#"{{"fib":"{}"}}"#, result)))
-  .unwrap())
+        .unwrap())
 }
