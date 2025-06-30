@@ -40,6 +40,9 @@ async fn fib_handler(req: Request) -> Result<Response<Body>, Error> {
     Ok(Response::builder()
         .status(200)
         .header("Content-Type", "application/json")
-        .body(Body::Text(format!(r#"{{"fib":"{}"}}"#, result)))
+        .body(Body::Text(format!(
+            r#"{{"number":{},"fibonacci":"{}"}}"#,
+            n, result
+        )))
         .unwrap())
 }
